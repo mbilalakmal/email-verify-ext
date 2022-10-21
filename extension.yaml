@@ -53,7 +53,7 @@ params:
     # Using single quotes so Regex works
     validationRegex: '^\S+$'
     validationErrorMessage:
-      Enter your Web API key which is available on the console (Project Overview > Project settings)
+      Enter your Web API key which is available on the console [Project Overview > Project settings](https://console.firebase.google.com/project/_/settings/general/)
     required: true
     immutable: true
 
