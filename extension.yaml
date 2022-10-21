@@ -1,5 +1,5 @@
 name: email-verify-ext
-version: 0.0.2
+version: 0.0.3
 specVersion: v1beta  # Firebase Extensions specification version (do not edit)
 
 displayName: Send a verification email to newly created user
@@ -48,12 +48,13 @@ params:
     label: Web API key for the Firebase project
     description: >-
       What is the Web API key for this Firebase project? We will use it to send the
-      verification email to newly created Auth users
+      verification email to newly created Auth users [Project Overview > Project settings]
+      (https://console.firebase.google.com/project/_/settings/general/)
     example: AIza********************
     # Using single quotes so Regex works
     validationRegex: '^\S+$'
     validationErrorMessage:
-      Enter your Web API key which is available on the console [Project Overview > Project settings](https://console.firebase.google.com/project/_/settings/general/)
+      Enter your Web API key which is available on the console (see description)
     required: true
     immutable: true
 

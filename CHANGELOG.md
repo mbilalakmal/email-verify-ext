@@ -1,3 +1,7 @@
+## Version 0.0.3
+
+Move project link to description from the validation error
+
 ## Version 0.0.2
 
 Add project settings link in extension.yaml
