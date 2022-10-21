@@ -1,0 +1,73 @@
+name: email-verify-ext
+version: 0.0.1
+specVersion: v1beta  # Firebase Extensions specification version (do not edit)
+
+displayName: Send a verification email to newly created user
+description: This extension sends a verification email to users created with providers that do not verify user's email address
+
+license: Apache-2.0  # The license you want for the extension
+
+author:
+  authorName: mbilalakmal
+  url: https://github.com/mbilalakmal/  # Author URL
+
+billingRequired: true
+
+params:
+  - param: LOCATION
+    label: Cloud Functions location
+    description: >-
+      Where do you want to deploy the functions created for this extension?
+      You usually want a location close to your database. Realtime Database
+      instances are located in `us-central1`. For help selecting a
+      location, refer to the [location selection
+      guide](https://firebase.google.com/docs/functions/locations).
+    type: select
+    options:
+      - label: Iowa (us-central1)
+        value: us-central1
+      - label: South Carolina (us-east1)
+        value: us-east1
+      - label: Northern Virginia (us-east4)
+        value: us-east4
+      - label: Belgium (europe-west1)
+        value: europe-west1
+      - label: London (europe-west2)
+        value: europe-west2
+      - label: Frankfurt (europe-west3)
+        value: europe-west3
+      - label: Hong Kong (asia-east2)
+        value: asia-east2
+      - label: Tokyo (asia-northeast1)
+        value: asia-northeast1
+    default: us-central1
+    required: true
+    immutable: true
+
+  - param: WEB_API_KEY
+    label: Web API key for the Firebase project
+    description: >-
+      What is the Web API key for this Firebase project? We will use it to send the
+      verification email to newly created Auth users
+    example: AIza********************
+    # Using single quotes so Regex works
+    validationRegex: '^\S+$'
+    validationErrorMessage:
+      Enter your Web API key which is available on the console (Project Overview > Project settings)
+    required: true
+    immutable: true
+
+
+roles:
+# No roles needed to only listen to trigger events
+
+resources:
+  - name: sendVerificationEmailOnSignup
+    type: firebaseextensions.v1beta.function
+    properties:
+      # Location is a user-configured parameter value specified during installation
+      location: ${LOCATION}
+      eventTrigger:
+        eventType: providers/firebase.auth/eventTypes/user.create
+        resource: projects/${PROJECT_ID}
+  
