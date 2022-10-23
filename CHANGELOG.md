@@ -1,3 +1,7 @@
+## Version 0.0.4
+
+Use service account JSON to import and initialize admin app
+
 ## Version 0.0.3
 
 Move project link to description from the validation error

@@ -5,8 +5,17 @@ import { UserRecord } from "firebase-functions/v1/auth";
 
 import * as clientAuth from "firebase/auth";
 import * as clientApp from "firebase/app";
+import { config } from "./config";
+import { cert } from "firebase-admin/app";
 
-admin.initializeApp();
+admin.initializeApp({
+  credential: cert({
+    projectId: config.serviceAccountProjectId,
+    clientEmail: config.serviceAccountEmail,
+    privateKey: config.serviceAccountPrivateKey,
+  }),
+});
+
 const adminAuth = admin.auth();
 
 /**
@@ -22,7 +31,7 @@ export const sendVerificationEmailOnSignup = functions.auth
       return;
     }
 
-    const apiKey = process.env.WEB_API_KEY;
+    const apiKey = config.webApiKey;
     const options: clientApp.FirebaseOptions = { apiKey };
 
     // Initialize the client app with client auth

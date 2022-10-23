@@ -1,5 +1,5 @@
 name: email-verify-ext
-version: 0.0.3
+version: 0.0.4
 specVersion: v1beta  # Firebase Extensions specification version (do not edit)
 
 displayName: Send a verification email to newly created user
@@ -56,7 +56,43 @@ params:
     validationErrorMessage:
       Enter your Web API key which is available on the console (see description)
     required: true
-    immutable: true
+    immutable: false
+
+  - param: SERVICE_ACCOUNT_PROJECT_ID
+    label: Project ID of Service account
+    description: >-
+      The project id of the service account. To extract this value from the service account certificate
+      you can use this converter: https://moralisweb3.github.io/firebase-extensions/service-account-converter/
+    type: string
+    example: example-id
+    required: true
+    immutable: false
+
+  - param: SERVICE_ACCOUNT_EMAIL
+    label: Email of service account
+    description: >-
+      The e-mail of the service account. To extract this value from the service account certificate
+      you can use this converter: https://moralisweb3.github.io/firebase-extensions/service-account-converter/
+    type: string
+    example: firebase-adminsdk-lxrdi@example-id.iam.gserviceaccount.com
+    validationRegex: ^([a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:[.-]?[a-zA-Z0-9]+)*\.[a-zA-Z]{2,7})$
+    validationErrorMessage: >-
+      The e-mail provided has invalid format.
+    required: true
+    immutable: false
+
+  - param: SERVICE_ACCOUNT_PRIVATE_KEY
+    label:  Private Key of Service Account
+    description: >-
+      The private key of the service account. To extract this value from the service account certificate
+      you can use this converter: https://moralisweb3.github.io/firebase-extensions/service-account-converter/
+    type: secret
+    example: serviceAccountPrivateKey
+    validationRegex: ^\S+$
+    validationErrorMessage: >-
+      The private key provided has invalid format.
+    required: true
+    immutable: false
 
 
 roles:
